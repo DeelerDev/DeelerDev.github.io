@@ -7,34 +7,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeelerDev</title>
     <link rel="icon" type="image/x-icon" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>DeelerDev</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </nav>
+        <div class="header-inner">
+            <a href="index.html" class="logo">DeelerDev</a>
+            <nav>
+                <a href="https://github.com/deelerdev" target="_blank" rel="noopener">GitHub</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
     </header>
+
     <main>
-        <section class="hero">
-            <h2>Building the Future of Technology</h2>
-            <p>DeelerDev is a cutting-edge tech company creating innovative solutions and pushing the boundaries of what's possible.</p>
-            <a href="about.html" class="cta-button">Learn More</a>
+        <section class="intro">
+            <h1>A place for <span class="accent">random projects</span>.</h1>
+            <p class="tagline">Some useful, some not. All on GitHub.</p>
         </section>
 
-        <section class="projects">
-            <h2>Our Projects</h2>
-            <div class="coming-soon">
-                <p>🚀 Exciting projects coming soon!</p>
+        <section class="section">
+            <h2 class="section-heading">Repos</h2>
+            <div class="repo-list" id="repoList">
+                <p class="loading">Loading repos...</p>
             </div>
         </section>
     </main>
+
     <footer>
-        <p>&copy; 2025 DeelerDev</p>
+        <p>DeelerDev</p>
     </footer>
+
+    <script>
+        fetch('https://api.github.com/orgs/DeelerDev/repos?per_page=100&sort=updated')
+            .then(r => r.json())
+            .then(repos => {
+                const list = document.getElementById('repoList');
+                list.innerHTML = '';
+
+                repos
+                    .filter(r => !r.archived)
+                    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+                    .forEach(repo => {
+                        const item = document.createElement('a');
+                        item.className = 'repo-item';
+                        item.href = repo.html_url;
+                        item.target = '_blank';
+                        item.rel = 'noopener';
+
+                        const lang = repo.language || 'misc';
+                        const stars = repo.stargazers_count > 0
+                            ? `<span class="repo-stars">&#9733; ${repo.stargazers_count}</span>`
+                            : '';
+
+                        item.innerHTML = `
+                            <div class="repo-top">
+                                <span class="repo-name">${repo.name}</span>
+                                ${stars}
+                            </div>
+                            <p class="repo-desc">${repo.description || 'No description.'}</p>
+                            <div class="repo-meta">
+                                <span class="repo-lang">${lang}</span>
+                                <span class="repo-updated">updated ${formatDate(repo.pushed_at)}</span>
+                            </div>
+                        `;
+                        list.appendChild(item);
+                    });
+            })
+            .catch(() => {
+                document.getElementById('repoList').innerHTML =
+                    '<p class="loading">Could not load repos. Visit <a href="https://github.com/deelerdev" target="_blank">GitHub</a>.</p>';
+            });
+
+        function formatDate(iso) {
+            const d = new Date(iso);
+            const now = new Date();
+            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            if (d.getFullYear() === now.getFullYear()) {
+                return months[d.getMonth()] + ' ' + d.getDate();
+            }
+            return months[d.getMonth()] + ' ' + d.getFullYear();
+        }
+    </script>
 </body>
 </html>
