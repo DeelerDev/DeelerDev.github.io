@@ -3,47 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeelerDev</title>
+    <title>About | DeelerDev</title>
     <link rel="icon" type="image/x-icon" href="assets/logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>DeelerDev</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-        </nav>
+        <div class="header-inner">
+            <a href="index.html" class="logo">DeelerDev</a>
+            <nav>
+                <a href="https://github.com/deelerdev" target="_blank" rel="noopener">GitHub</a>
+                <a href="about.html">About</a>
+            </nav>
+        </div>
     </header>
+
     <main>
-        <section class="about-section">
-            <h2>About DeelerDev</h2>
-            <div class="about-content">
-                <p>
-                    DeelerDev is a forward-thinking technology company dedicated to creating innovative solutions 
-                    that shape the future. We combine cutting-edge technology with creative problem-solving to 
-                    deliver exceptional products and services.
-                </p>
-                <p>
-                    Our team of passionate developers, designers, and innovators work tirelessly to bring 
-                    groundbreaking ideas to life. We believe in the power of technology to transform industries 
-                    and improve lives around the world.
-                </p>
-                <p>
-                    <strong>Our Mission:</strong> To push the boundaries of what's possible and create technology 
-                    that empowers people and businesses to achieve their full potential.
-                </p>
-                <p>
-                    <strong>Connect with us:</strong> Check out our projects and contributions on 
-                    <a href="https://github.com/deelerdev" target="_blank">GitHub</a>
-                </p>
-            </div>
+        <section class="intro">
+            <h1>About</h1>
+        </section>
+
+        <section class="section">
+            <p class="tagline" style="margin-bottom: 1.5rem;">
+                DeelerDev is a GitHub org for random projects. JavaScript, TypeScript, C, whatever's interesting at the time.
+            </p>
+            <p class="tagline" style="margin-bottom: 1.5rem;">
+                Forks of useful tools, a p-stream client, some GitHub stats experiments, and a Linux kernel source tree for good measure.
+            </p>
+            <p class="tagline">
+                <a href="https://github.com/deelerdev" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">github.com/deelerdev</a>
+            </p>
         </section>
     </main>
+
     <footer>
-        <p>&copy; 2025 DeelerDev</p>
+        <p>DeelerDev</p>
     </footer>
 </body>
 </html>
